@@ -1,0 +1,35 @@
+#!usr/bin/python
+# --- DOB: v1 - 15 Apr 2015
+
+from readjob import *
+
+
+#----- SPECIFICS ------#
+walltime = '00:10:00'
+nodes = 200
+ppn = 32
+Nc = SampleSize()
+
+#----------------------# 
+foo = open('smallqmc.pbs', 'w', 0) 
+foo.write("#!/bin/bash\n")
+foo.write("#PBS -l walltime=" + walltime +"\n") 
+foo.write("#PBS -l nodes=" +str(nodes)+":ppn="+str(ppn)+":xe\n")
+foo.write("#PBS -N h1.80T4000-qmc\n")
+foo.write("#PBS -e $PBS_JOBID.err\n") 
+foo.write("#PBS -o $PBS_JOBID.out\n") 
+foo.write("#PBS -A jq4\n") 
+foo.write("#PBS -q high\n") 
+
+# Change to dir where script is located
+foo.write("\ncd /u/sciteam/tubman/scratch/bpad/SUPER/LDA\n\n") 
+
+# Launch parallel jobs to allocated nodes
+for i in range(0,Nc):
+    foo.write("aprun -n " + str(ppn)+ " -N 32 /u/sciteam/tubman/scratch/bpad/espresso-5.1.1/bin/pw.x ./InFiles/scf" +str(i) +".in > ./OutFiles/scf" + str(i) +".out &\n") 
+
+foo.write("\nwait\n")
+foo.write("touch done\n")
+
+foo.close()
+#----------------------# 

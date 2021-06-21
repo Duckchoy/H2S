@@ -1,0 +1,37 @@
+For PBE :
+h3s.scf.fit.in -> h3s.scf.in -> h3s.elph.in -> lambda.in 
+
+For LDA:
+h3s.scf.fit.in -> h3s.scf.in -> h3s.elph.in -> (impose sum rule on dyn1) 
+  -> set trans = .false. in h3s.elph.in -> h3s.elph.in -> make sure all the
+  frequencies in elph.inp_lambda.1 are positive -> lambda.in
+
+For OPTIMIZE:
+1. Copy the following files in the OPTIMIZE directory:
+   i. h3s.scf.in (change the path of the pseudo file)
+   ii. It's corresponding h3s.scf.out
+   iii. make a copy of the h3s.scf.in and rename it scf.in
+   iv. in scf.in change 
+       (a) add 'line0' to the 'prefix', like './Temp/h3s line0 
+       (b) and change the atomic positions to 'lin1', 'line2' ...
+   v. a copy of h3s.dyn1 (make sure sum rule is imposed) 
+
+2. Line 76 of optimize.py has a string which is machine specific, make
+   sure that's correct. If working on a super comp make sure you correctly
+   specify the nojobs (global) in parameters.py and then rum the 'startup'
+   script for the pbs files. Also in optimize.py make sure you specify the 
+   working directory (only on a super comp). 
+
+3. The following files must be in the root directory: 
+   i. optimize.py (for doing optimization)
+   ii. evaluate.py (file containing various functions)
+   iii. readjob.py (for reading input files)
+   iv. parameters.py (eneter free parameters here, specfically Nc) 
+  
+4. pwsf calculations will be performed over Nc number of files present 
+   in InFiles directory and it's output files will be dumped into OutFiles. 
+   The result of optimization will be printed to optimize.out file.
+
+
+
+

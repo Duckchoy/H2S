@@ -1,0 +1,14 @@
+Electron-phonon coefficients for H3S
+ &inputph
+  tr2_ph=1.0d-10,
+  prefix='h3s',
+  fildvscf='aldv',
+  outdir='./',
+  fildyn='h3s.dyn',
+  electron_phonon='interpolated',
+  el_ph_sigma=0.005,
+  el_ph_nsigma=10,
+  trans=.true.,
+  ldisp=.true.,
+  nq1=8, nq2=8, nq3=8, 
+/

@@ -1,0 +1,20 @@
+directory:  /home/mayukh/utils/espresso-5.0.2/bin/
+examples directory: /home/mayukh/utils/espresso-5.0.2/examples/
+To run a single processor job:
+  Goto: /home/mayukh/utils/espresso-5.0.2/examples/examples/example01/results
+  Type: pw.x < al.scf.david.in > myout
+To run a multi processor job:
+  Goto: /home/mayukh/utils/espresso-5.0.2/examples/examples/example01/results
+  Type for 8 processors:  
+    /home/mayukh/utils/mpich2-install/bin/mpirun -np 8 pw.x < al.scf.david.in  > myout
+    /home/mayukh/utils/mpich2-install/bin/mpirun -np 8 /home/mayukh/utils/espresso-5.0.2/bin/pw.x < al.scf.david.in  > myout
+
+
+INPUT guide:
+/home/mayukh/utils/espresso-5.0.2/Doc/INPUT_PW.txt 
+user guide:
+/home/mayukh/utils/espresso-5.0.2/Doc/user_guide.pdf
+online
+http://www.quantum-espresso.org/
+Plotting tool for crystal structure and maybe band structure
+http://www.xcrysden.org/
